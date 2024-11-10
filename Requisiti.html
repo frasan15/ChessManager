@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Chess Manager</title>
+<link href=".css.css" rel="stylesheet" type="text/css">
+<style>
+@media print {  /* adjusted to print the html to a single-page pdf */
+body {
+	font-size: 9.2pt;
+}
+</style>
+</head>
+<body>
+
+<h1>Chess Manager</h1>
+<p>
+Si scriva un programma che sia in grado di gestire delle partite a scacchi.
+Le classi si trovano nel package <b>chess</b>.
+La classe principale è <b>ChessManager</b>.
+La classe <b>ExampleMain</b> nel package <b>main</b> presenta esempi di uso dei metodi principali ed esempi dei controlli richiesti.
+Tutte le eccezioni sono di tipo <b>ChessException</b>.
+</p>
+
+
+<h2>R1: Scacchiera</h2>
+<p>
+La classe <b>Board</b> rappresenta una scacchiera quadrata.
+Il costruttore accetta due parametri: il nome della scacchiera, che la identifica univocamente,
+e la sua dimensione (numero celle su un lato).
+Il nome e la sua dimensione possono essere ottenuti con gli oppourtuni getters: <b>getName</b>() e <b>getSize</b>().
+</p>
+
+<p>
+La classe <b>Piece</b> definisce come costanti le stringe rappresentanti i pezzi.
+Il metodo <b>addPiece</b>(String p, int x, int y) permette di aggiungere un pezzo alla scacchiera in posizione (x, y).
+Passando <b>null</b> come primo parametro è possibile rimuovere, se presente, il pezzo in posizione (x,y).
+Il metodo <b>getPiece</b>(int x, int y), restituisce il pezzo il posizione (x,y).
+Se nessun pezzo è presente il metodo restituisce <b>null</b>.
+Gli indici delle celle partono da 0.
+Entrambi i metodi lanciano un'eccezione se la posizione fornita non è valida.
+</p>
+
+
+<h2>R2: Giocatori</h2>
+
+<p>
+La classe <b>Player</b> rappresenta un giocatore.
+Il costuttore riceve come parametri il nome del giocatore, la sua nazionalità e la sua età.
+La classe deve implementare <b>toString()</b>, che restituisce queste informazioni separate da vigole.
+<strong>NON</strong> inserire spazi se non già presenti nel nome o nella nazionalità.
+Esempo: <i>"Edoardo,Italian,29"</i>.
+</p>
+
+<p>
+Il metodo <b>addBoard</b>(Board b) permette di aggiungere una <b>Board</b> al <b>ChessManager</b>.
+Il metodo <b>getBoard</b>(String boardName) restituisce la <b>Board</b> dato il nome.
+Il metodo <b>addPlayer</b>(Player p) permette di aggiungere un <b>Player</b> al <b>ChessManager</b>.
+Il metodo <b>getPlayer</b>(String playerName) restituisce il <b>Player</b> dato il nome.
+</p>
+
+<p>
+Il metodo <b>addPlayerToBoard</b>(String playerName, String boardName)
+specifica che il giocatore PlayerName sta giocando sulla scacchiera boardName.
+Il metodo <b>getBoardsOfPlayer</b>(String playerName)
+restituisce una <b>Collection</b> di scacchiere su cui sta giocando il giocatore playerName.
+</p>
+
+<h2>R3: Tornei</h2>
+<p>
+Il metodo <b>createTournament</b>(String tournamentName) crea un torneo identificato univocamente dal suo nome.
+Lancia un'eccezione se un torneo con lo stesso nome è già stato creato.
+</p>
+
+<p>
+Il metodo <b>addPlayerToTournament</b>(String tournamentName, String playerName, Integer score)
+aggiunge il giocatore playerName al torneo tournamentName, specificanto il suo punteggio nel torneo (score).
+Lancia un'eccezione se il giocatore playerName non è stato definito.
+</p>
+
+<p>
+Il metodo <b>getLeadingPlayer</b>(String tournamentName)
+restituisce il nome del giocatore con il punteggio più alto nel torneo e il suo punteggio,
+separati da <i>":"</i>. Esempio: <i>"Edoardo:51"</i>.
+<strong>NON</strong> inserire spazi se non già presenti nel nome.
+Restituire <b>null</b> se il torneo non ha giocatori. Considerare che <strong>NON</strong> ci siano situazioni di parità.
+
+</p>
+
+
+
+<h2>R4: Interfaccia</h2>
+<p>
+Creare un'interfaccia grafica che, inizializzata con una board già popolata,
+permetta di ottenere il pezzo (o <b>null</b>) data la sua posizione (x,y).
+Permettere inoltre di rimuovere un pezzo data la sua posizione (x,y).
+Gestire le <b>ChessException</b> che si scatenano, in entrambe le operazioni, quando la posizione fornita non è valida.
+In questi casi mostrare un messaggio all'utente.
+
+</p>
+
+<p>
+Le classi dell'interfaccia devono trovarsi nel package <b>gui</b>. La classe <b>Client</b> contiene un esempio di main.
+Scrivere il codice che si occupa di far partire l'interfaccia all'interno del metodo <b>start</b>(Board b),
+ricevente la board inizializzata come parametro.
+</p>
+
+<h2>R5: N Regine</h2>
+<p>
+Il metodo <b>fillQueens</b>(String boardName, Integer boardSize) restituisce una <b>Board</b> 
+di nome boardName e grandezza boardSize contenente unicamete regine, in numero uguale alla dimensione della <b>Board</b>.
+Le regine devono essere posizionate di modo che nessuna regina possa essere sotto attacco dalle altre.
+Si ricorda che una regina può attaccare le altre muovendosi di un numero di celle a piacere in orizzontale, verticale o diagonale.
+</p>
+
+<p>
+La funzione già fornita <b>checkQueen</b>(Board b, int x, int y) restituisce <b>true</b> se è possibile inserire una regina in una cella (x,y)
+contollando che la cella sia vuota e che i vincoli non vengano violati. Atrimenti restituisce <b>false</b>.
+</p>
+
+<p>
+Testare con dimensioni ridotte (da 3 a 10), data la complessità del problema.
+</p>
+
+<ul class="hint">
+<li> Nel main di esempio è fornita la funzione <b>printBoard</b>(Board b) per stampare a schermo la scacchiera.
+<li> Si consiglia di usare la funzione <b>checkQueen</b>(Board b, int x, int y) per effettuare i controlli di inserimento.
+</ul>
+
+</body>
+</html>

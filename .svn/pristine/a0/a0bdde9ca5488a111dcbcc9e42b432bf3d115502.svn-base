@@ -1,0 +1,27 @@
+package chess;
+
+public class Board {
+	
+	public Board(String name, int size) {
+		//TODO
+	}
+	
+	public void addPiece(String piece, int x, int y) throws ChessException{
+		//TODO
+	}
+	
+	public String getPiece(int x, int y) throws ChessException {
+		//TODO
+		return null;
+	}
+	
+	public int getSize() {
+		//TODO
+		return -1;
+	}
+	
+	public String getName() {
+		//TODO
+		return null;
+	}	
+}

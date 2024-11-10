@@ -1,0 +1,80 @@
+package chess;
+
+import java.util.Collection;
+
+public class ChessManager {
+	
+	public void addBoard(Board b) {
+		//TODO
+	}
+	
+	public Board getBoard(String boardName) {
+		//TODO
+		return null;
+	}
+	
+	public void addPlayer(Player p) {
+		//TODO
+	}
+	
+	public Player getPlayer(String playerName) {
+		//TODO
+		return null;
+	}
+	
+	public void addPlayerToBoard(String playerName, String boardName) {
+		//TODO
+	}
+	
+	public Collection<Board> getBoardsOfPlayer(String playerName) {
+		//TODO
+		return null;
+	}
+	
+	public void createTournament(String tournamentName) throws ChessException {
+		//TODO
+	}
+	
+	public void addPlayerToTournament(String tournamentName, String playerName, Integer score) throws ChessException{
+		//TODO
+	}
+	
+	public String getLeadingPlayer(String tournamentName) {
+		//TODO
+		return null;
+	}
+	
+	public Board fillQueens(String boardName, Integer boardSize) {
+		//TODO
+		return null;
+	}	
+	
+	//DO NOT CHANGE
+	private boolean checkQueen(Board board, int x, int y) throws ChessException {
+		if(board.getPiece(x, y) != null) {
+			return false;
+		}		
+		//rows and columns
+		for(int i = 0; i < board.getSize(); ++i) {
+			if((board.getPiece(x,i)!=null && board.getPiece(x,i).equals(Piece.QUEEN)) || (board.getPiece(i,y) != null && board.getPiece(i,y).equals(Piece.QUEEN))) {
+				return false;
+			}
+		}
+		//diagonals
+		for(int i = 0; i < board.getSize(); ++i) {			
+			if((x+i) < board.getSize() && (y+i) < board.getSize() && (board.getPiece(x+i,y+i) != null && board.getPiece(x+i,y+i).equals(Piece.QUEEN))) {
+				return false;
+			}
+			if((x+i) < board.getSize() && (y-i) >= 0 && (board.getPiece(x+i,y-i) != null && board.getPiece(x+i,y-i).equals(Piece.QUEEN))) {
+				return false;
+			}
+			if((x-i) >= 0 && (y+i) < board.getSize() && (board.getPiece(x-i,y+i) != null && board.getPiece(x-i,y+i).equals(Piece.QUEEN))) {
+				return false;
+			}
+			if((x-i) >= 0 && (y-i) >= 0 && (board.getPiece(x-i,y-i) != null && board.getPiece(x-i,y-i).equals(Piece.QUEEN))) {
+				return false;
+			}
+		}
+		return true;
+	}	
+}
